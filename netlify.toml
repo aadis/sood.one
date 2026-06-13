@@ -1,0 +1,19 @@
+[build]
+  command = "npm run prebuild && npx quartz build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_VERSION = "10"
+
+[[redirects]]
+  from = "http://sood.one/*"
+  to = "https://sood.one/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.sood.one/*"
+  to = "https://sood.one/:splat"
+  status = 301
+  force = true
