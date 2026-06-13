@@ -19,6 +19,10 @@ export const NotFoundPageType: QuartzPageTypePlugin = () => ({
       frontmatter: { title: notFound, tags: [] },
     })
 
+    // The 404 page should never surface in listings (recent-notes, etc.),
+    // only resolve when a URL isn't found.
+    vfile.data.unlisted = true
+
     return [
       {
         slug,

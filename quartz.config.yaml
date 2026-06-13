@@ -225,6 +225,19 @@ plugins:
       position: beforeBody
       priority: 15
       display: all
+  - source: github:quartz-community/recent-notes
+    enabled: true
+    options:
+      title: Recent posts
+      limit: 5
+      linkToMore: posts/
+      showTags: true
+      hideFolderPages: true
+      hideTagPages: true
+    layout:
+      position: afterBody
+      priority: 10
+      condition: index
 layout:
   groups:
     toolbar:
