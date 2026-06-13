@@ -1,10 +1,9 @@
 [build]
-  command = "npm run prebuild && npx quartz build"
+  command = "node ./quartz/bootstrap-cli.mjs plugin install --from-config && node ./quartz/bootstrap-cli.mjs build"
   publish = "public"
 
 [build.environment]
   NODE_VERSION = "22"
-  NPM_VERSION = "10"
 
 [[redirects]]
   from = "http://sood.one/*"
