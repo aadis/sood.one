@@ -29,7 +29,10 @@ The headline result is genuinely surprising. A simple prompting change, no fine-
 
 A transformer generates one token at a time. When it generates token N, it has full attention over *every* prior token — both the prompt and every token it has already produced. This is direct access through attention, not a sequential hidden state being passed along. Token N can attend to token 1 with the same fidelity as it attends to token N−1.
 
-So when the model has generated an intermediate step — "he has 3 left" — that step becomes a *real input* conditioning everything that follows. It isn't a side effect of the computation; it's part of the context now. **The reasoning chain works because generated tokens become real inputs.**
+So when the model has generated an intermediate step — "he has 3 left" — that step becomes a *real input* conditioning everything that follows. It isn't a side effect of the computation; it's part of the context now.
+
+> [!tip] Insight
+> The reasoning chain works because generated tokens become real inputs.
 
 Two mechanisms build on this:
 
@@ -37,7 +40,8 @@ Two mechanisms build on this:
 
 2. **Probability-space navigation.** Training data has a strong statistical pattern: correct conclusions tend to follow correct intermediate steps. By generating those intermediate tokens *before* the answer, the model steers itself toward a region of probability space where correct answers cluster. Each step shifts the distribution for what comes next — away from "plausible-but-wrong shortcut" territory and toward "correct continuation" territory.
 
-In one sentence: the reasoning chain works not because tokens "think," but because each intermediate step constrains the probability distribution for what follows, navigating toward the regions where correct answers live.
+> [!tip] Insight
+> The reasoning chain works not because tokens "think," but because each intermediate step constrains the probability distribution for what follows, navigating toward the regions where correct answers live.
 
 ---
 
@@ -47,7 +51,12 @@ Chain-of-thought only works above roughly 100B parameters. Below that threshold 
 
 This makes sense mechanically. A smaller model doesn't have a rich enough statistical map of "correct reasoning step → correct next step." It generates steps that *look* like reasoning but are closer to random walks through that space, and those wrong intermediate tokens condition an equally wrong conclusion.
 
-The implication is worth sitting with: chain-of-thought is not a generalizable prompting trick you can sprinkle on any model. It's an emergent capability that unlocks at scale. That's also why it matters for agents — as models get pushed smaller for edge deployment or cost, this reasoning scaffold degrades. It's a real constraint on where agentic behavior stays reliable.
+The implication is worth sitting with:
+
+> [!tip] Insight
+> Chain-of-thought is not a generalizable prompting trick you can sprinkle on any model. It's an emergent capability that unlocks at scale.
+
+That's also why it matters for agents — as models get pushed smaller for edge deployment or cost, this reasoning scaffold degrades. It's a real constraint on where agentic behavior stays reliable.
 
 ---
 
@@ -121,7 +130,10 @@ When the model generates a reasoning-chain token, it has:
 - learned V content that blends into something useful for downstream layers,
 - all of this across H heads simultaneously, in every layer.
 
-The answer token is generated from a context that is, at once, syntactically structured, semantically weighted, and position-aware — a far richer input than any fixed hidden state could ever represent. That's the real reason the chain of thought works: the steps don't just sit there as text, they reshape the input that produces the answer.
+The answer token is generated from a context that is, at once, syntactically structured, semantically weighted, and position-aware — a far richer input than any fixed hidden state could ever represent.
+
+> [!tip] Insight
+> That's the real reason the chain of thought works: the steps don't just sit there as text, they reshape the input that produces the answer.
 
 ---
 
@@ -132,7 +144,8 @@ The same conditioning-scaffold idea shows up everywhere downstream:
 - **ReAct** extends chain-of-thought directly — the reasoning chain stays the same mechanic, but instead of staying internal it *interleaves with actions* (querying an API, reading a result). Real-world observations get appended to the context, and the model reasons over them. Same token-conditioning scaffold, much bigger surface area.
 - **Tree of Thoughts** takes the conditioning insight and asks: what if, instead of one chain, you search a *tree* of possible reasoning paths and evaluate which branch to follow? The intermediate steps become nodes in a search tree.
 
-Once you see reasoning as "generated tokens reshaping the input distribution," a lot of the agent literature stops looking like a grab-bag of tricks and starts looking like variations on a single move.
+> [!tip] Insight
+> Once you see reasoning as "generated tokens reshaping the input distribution," a lot of the agent literature stops looking like a grab-bag of tricks and starts looking like variations on a single move.
 
 ---
 
