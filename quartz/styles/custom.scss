@@ -1,17 +1,18 @@
 @use "./variables.scss" as *;
 
 // ============================================================================
-//  sood.one — Literary typography
-//  Newsreader (headings) · Source Serif 4 (body) · JetBrains Mono (code)
+//  sood.one — Editorial typography
+//  Fraunces (headings) · Inter (body) · JetBrains Mono (code)
+//  Serif character in the headings; clean sans for readable, technical prose.
 //  Hierarchy through measure, weight, and whitespace — not color.
 // ============================================================================
 
 // --- Global rendering niceties -------------------------------------------
 html {
-  font-size: 19px; // base reading size; rems scale from here
+  font-size: 18px; // Inter has a tall x-height; 18px reads comfortably
 
   @media all and ($mobile) {
-    font-size: 17px;
+    font-size: 16px;
   }
 }
 
@@ -22,32 +23,31 @@ body {
   font-feature-settings:
     "kern" 1,
     "liga" 1,
-    "onum" 1; // old-style figures sit better in serif prose
-  letter-spacing: 0.003em;
+    "calt" 1,
+    "cv05" 1; // lowercase l with tail — small clarity win in Inter
+  letter-spacing: -0.006em; // Inter wants a hair of negative tracking at reading sizes
 }
 
 // --- The reading column ----------------------------------------------------
 // A comfortable measure is the single biggest lever for readable prose.
 .center {
   & article {
-    max-width: 38rem; // ~66–70 characters of Source Serif
+    max-width: 40rem; // ~70 characters of Inter
     margin-left: auto;
     margin-right: auto;
 
-    line-height: 1.72;
+    line-height: 1.65;
 
     p,
     li {
-      // let descenders breathe; keep ragged-right tidy
       text-wrap: pretty;
     }
 
     p {
       margin-top: 0;
-      margin-bottom: 1.15em;
+      margin-bottom: 1.1em;
     }
 
-    // first paragraph after a heading hugs it a little less tightly
     h1 + p,
     h2 + p,
     h3 + p {
@@ -57,7 +57,7 @@ body {
     ul,
     ol {
       padding-left: 1.4rem;
-      margin: 1.15em 0;
+      margin: 1.1em 0;
       li {
         margin: 0.3em 0;
         padding-left: 0.2rem;
@@ -75,13 +75,13 @@ body {
   & > .page-header,
   & .breadcrumb-container,
   & .content-meta {
-    max-width: 38rem;
+    max-width: 40rem;
     margin-left: auto;
     margin-right: auto;
   }
 }
 
-// --- Headings: literary scale, restrained weight ---------------------------
+// --- Headings: Fraunces, characterful but controlled -----------------------
 h1,
 h2,
 h3,
@@ -90,24 +90,29 @@ h5,
 h6 {
   font-family: var(--headerFont);
   color: var(--dark);
-  letter-spacing: -0.011em;
-  line-height: 1.18;
+  letter-spacing: -0.014em;
+  line-height: 1.15;
   text-wrap: balance;
+  // Fraunces is variable on optical size + softness; lean display + a touch of "wonk"
+  font-variation-settings:
+    "opsz" 144,
+    "SOFT" 0,
+    "WONK" 1;
 }
 
 .center article {
   & > h1,
   & h1 {
-    font-size: 2.45rem;
+    font-size: 2.6rem;
     font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -0.018em;
+    line-height: 1.08;
+    letter-spacing: -0.022em;
     margin-top: 0;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.55em;
   }
 
   h2 {
-    font-size: 1.7rem;
+    font-size: 1.75rem;
     font-weight: 500;
     margin-top: 2.6rem;
     margin-bottom: 0.5em;
@@ -121,19 +126,22 @@ h6 {
   }
 
   h4 {
-    font-size: 1.08rem;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-top: 1.7rem;
     margin-bottom: 0.3em;
   }
 
+  // Small uppercase headings switch to Inter — Fraunces small-caps look fussy
   h5,
   h6 {
-    font-size: 0.95rem;
+    font-family: var(--bodyFont);
+    font-size: 0.82rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--gray);
+    font-variation-settings: normal;
     margin-top: 1.6rem;
   }
 }
@@ -144,17 +152,20 @@ h1.page-title,
 .page-title a {
   font-family: var(--headerFont);
   font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
+  font-size: 1.45rem;
+  letter-spacing: -0.018em;
+  font-variation-settings:
+    "opsz" 144,
+    "WONK" 1;
 }
 
-// --- Links: ink prose, indigo accent, underline on intent ------------------
+// --- Links: ink prose, slate-teal accent, underline on intent --------------
 a {
   color: var(--secondary);
   font-weight: inherit; // don't bold links inside prose — too noisy
   text-underline-offset: 0.16em;
-  text-decoration-thickness: 0.06em;
-  text-decoration-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+  text-decoration-thickness: 0.07em;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 38%, transparent);
 
   &:hover {
     color: var(--tertiary);
@@ -167,7 +178,7 @@ a {
 .center article p a,
 .center article li a {
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--secondary) 30%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--secondary) 32%, transparent);
 }
 
 // Internal wikilinks: drop the highlighted "pill" look — keep them as clean links
@@ -176,7 +187,7 @@ a {
   padding: 0;
   border-radius: 0;
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--secondary) 30%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--secondary) 32%, transparent);
 
   &:hover {
     text-decoration-color: currentColor;
@@ -185,21 +196,20 @@ a {
 
 // --- Emphasis & strong -----------------------------------------------------
 em {
-  font-style: italic; // Source Serif 4 has a true italic
+  font-style: italic;
 }
 strong {
   font-weight: 600;
   color: var(--dark);
 }
 
-// --- Blockquotes: quiet, italic, indented ----------------------------------
+// --- Blockquotes: quiet, set apart (sans → not italic) ---------------------
 .center article blockquote {
   margin: 1.6em 0;
-  border-left: 2px solid color-mix(in srgb, var(--secondary) 45%, var(--lightgray));
+  border-left: 2px solid color-mix(in srgb, var(--secondary) 50%, var(--lightgray));
   padding: 0.1em 0 0.1em 1.4rem;
   color: var(--gray);
-  font-style: italic;
-  font-size: 1.04em;
+  font-size: 1.02em;
 
   p {
     margin-bottom: 0.6em;
@@ -209,13 +219,12 @@ strong {
 // --- Code: subtle, monospaced ----------------------------------------------
 code {
   font-family: var(--codeFont);
-  font-size: 0.86em;
-  font-feature-settings: normal;
+  font-size: 0.85em;
   letter-spacing: 0;
 }
 
 .center article :not(pre) > code {
-  background-color: color-mix(in srgb, var(--secondary) 7%, var(--light));
+  background-color: color-mix(in srgb, var(--secondary) 8%, var(--light));
   padding: 0.12em 0.34em;
   border-radius: 4px;
   border: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
@@ -244,7 +253,7 @@ hr {
 
 // --- Chrome (sidebars, toc, explorer): let it recede -----------------------
 .sidebar {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 
   a {
     font-weight: inherit;
@@ -253,7 +262,7 @@ hr {
 
 .toc,
 .explorer {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
 
   & .toc-title,
   & .explorer-toggle,
@@ -272,17 +281,16 @@ hr {
   }
 }
 
-// Content meta (dates, reading time) — small, muted, set apart
+// Content meta (dates, reading time) — small, muted, quiet
 .content-meta {
   color: var(--gray);
-  font-style: italic;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   margin-top: 0.4rem;
 }
 
 // Breadcrumbs — quiet
 .breadcrumb-container {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: var(--gray);
 }
 

@@ -24,29 +24,29 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Newsreader
-      body: Source Serif 4
+      header: Fraunces
+      body: Inter
       code: JetBrains Mono
     colors:
       lightMode:
-        light: "#faf8f4"
-        lightgray: "#e7e3db"
-        gray: "#9c968b"
-        darkgray: "#39362f"
-        dark: "#2b2a28"
-        secondary: "#4b4e8f"
-        tertiary: "#6e72b3"
-        highlight: rgba(75, 78, 143, 0.07)
+        light: "#fcfcfb"
+        lightgray: "#ececef"
+        gray: "#8a8a8f"
+        darkgray: "#2a2a2c"
+        dark: "#1c1c1e"
+        secondary: "#3a6b6b"
+        tertiary: "#4f8a8a"
+        highlight: rgba(58, 107, 107, 0.07)
         textHighlight: "#fbe79e88"
       darkMode:
-        light: "#1a1916"
-        lightgray: "#322f2a"
-        gray: "#7a7468"
-        darkgray: "#d6d0c4"
-        dark: "#ece6da"
-        secondary: "#9a9ee0"
-        tertiary: "#b6b9ec"
-        highlight: rgba(154, 158, 224, 0.10)
+        light: "#161618"
+        lightgray: "#2a2a2d"
+        gray: "#6e6e74"
+        darkgray: "#cdcdd2"
+        dark: "#ececee"
+        secondary: "#6fb3b3"
+        tertiary: "#8acccc"
+        highlight: rgba(111, 179, 179, 0.10)
         textHighlight: "#b3920288"
 plugins:
   - source: github:quartz-community/created-modified-date
@@ -100,12 +100,12 @@ plugins:
       fontOrigin: googleFonts
       useThemeFonts: false
       header:
-        name: Newsreader
-        weights: [400, 500, 600, 700]
+        name: Fraunces
+        weights: [400, 500, 600]
         includeItalic: true
       body:
-        name: Source Serif 4
-        weights: [400, 600]
+        name: Inter
+        weights: [400, 500, 600]
         includeItalic: true
       code:
         name: JetBrains Mono
