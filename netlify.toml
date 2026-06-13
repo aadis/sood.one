@@ -1,5 +1,8 @@
 [build]
-  command = "node ./quartz/bootstrap-cli.mjs plugin install --from-config && node ./quartz/bootstrap-cli.mjs build"
+  # Wipe .quartz first: if the plugin dirs persist between CI builds, the
+  # installer short-circuits ("already installed") and never regenerates
+  # .quartz/plugins/index.ts, which Head.tsx imports — breaking the build.
+  command = "rm -rf .quartz && node ./quartz/bootstrap-cli.mjs plugin install --from-config && node ./quartz/bootstrap-cli.mjs build"
   publish = "public"
 
 [build.environment]
