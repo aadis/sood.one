@@ -1,3 +1,293 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ============================================================================
+//  sood.one — Literary typography
+//  Newsreader (headings) · Source Serif 4 (body) · JetBrains Mono (code)
+//  Hierarchy through measure, weight, and whitespace — not color.
+// ============================================================================
+
+// --- Global rendering niceties -------------------------------------------
+html {
+  font-size: 19px; // base reading size; rems scale from here
+
+  @media all and ($mobile) {
+    font-size: 17px;
+  }
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "onum" 1; // old-style figures sit better in serif prose
+  letter-spacing: 0.003em;
+}
+
+// --- The reading column ----------------------------------------------------
+// A comfortable measure is the single biggest lever for readable prose.
+.center {
+  & article {
+    max-width: 38rem; // ~66–70 characters of Source Serif
+    margin-left: auto;
+    margin-right: auto;
+
+    line-height: 1.72;
+
+    p,
+    li {
+      // let descenders breathe; keep ragged-right tidy
+      text-wrap: pretty;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1.15em;
+    }
+
+    // first paragraph after a heading hugs it a little less tightly
+    h1 + p,
+    h2 + p,
+    h3 + p {
+      margin-top: 0.35em;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.4rem;
+      margin: 1.15em 0;
+      li {
+        margin: 0.3em 0;
+        padding-left: 0.2rem;
+      }
+    }
+
+    img {
+      border-radius: 4px;
+    }
+  }
+}
+
+// Keep the page title / breadcrumbs / meta aligned to the same column
+.center {
+  & > .page-header,
+  & .breadcrumb-container,
+  & .content-meta {
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// --- Headings: literary scale, restrained weight ---------------------------
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--headerFont);
+  color: var(--dark);
+  letter-spacing: -0.011em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.center article {
+  & > h1,
+  & h1 {
+    font-size: 2.45rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    margin-top: 0;
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-top: 2.6rem;
+    margin-bottom: 0.5em;
+  }
+
+  h3 {
+    font-size: 1.32rem;
+    font-weight: 600;
+    margin-top: 2.1rem;
+    margin-bottom: 0.4em;
+  }
+
+  h4 {
+    font-size: 1.08rem;
+    font-weight: 600;
+    margin-top: 1.7rem;
+    margin-bottom: 0.3em;
+  }
+
+  h5,
+  h6 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 1.6rem;
+  }
+}
+
+// --- The page (site) title in the sidebar ----------------------------------
+.page-title,
+h1.page-title,
+.page-title a {
+  font-family: var(--headerFont);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+// --- Links: ink prose, indigo accent, underline on intent ------------------
+a {
+  color: var(--secondary);
+  font-weight: inherit; // don't bold links inside prose — too noisy
+  text-underline-offset: 0.16em;
+  text-decoration-thickness: 0.06em;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+
+  &:hover {
+    color: var(--tertiary);
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+  }
+}
+
+// Body prose links carry a quiet underline so they read as links without color shouting
+.center article p a,
+.center article li a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 30%, transparent);
+}
+
+// Internal wikilinks: drop the highlighted "pill" look — keep them as clean links
+.center article a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 30%, transparent);
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+// --- Emphasis & strong -----------------------------------------------------
+em {
+  font-style: italic; // Source Serif 4 has a true italic
+}
+strong {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+// --- Blockquotes: quiet, italic, indented ----------------------------------
+.center article blockquote {
+  margin: 1.6em 0;
+  border-left: 2px solid color-mix(in srgb, var(--secondary) 45%, var(--lightgray));
+  padding: 0.1em 0 0.1em 1.4rem;
+  color: var(--gray);
+  font-style: italic;
+  font-size: 1.04em;
+
+  p {
+    margin-bottom: 0.6em;
+  }
+}
+
+// --- Code: subtle, monospaced ----------------------------------------------
+code {
+  font-family: var(--codeFont);
+  font-size: 0.86em;
+  font-feature-settings: normal;
+  letter-spacing: 0;
+}
+
+.center article :not(pre) > code {
+  background-color: color-mix(in srgb, var(--secondary) 7%, var(--light));
+  padding: 0.12em 0.34em;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
+}
+
+pre {
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--darkgray) 3%, var(--light));
+}
+
+// --- Horizontal rules & footnotes: hairlines -------------------------------
+hr {
+  border: none;
+  border-top: 1px solid var(--lightgray);
+  margin: 2.6em auto;
+  width: 100%;
+}
+
+.footnotes {
+  margin-top: 2.8rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 0.92rem;
+  color: var(--gray);
+}
+
+// --- Chrome (sidebars, toc, explorer): let it recede -----------------------
+.sidebar {
+  font-size: 0.88rem;
+
+  a {
+    font-weight: inherit;
+  }
+}
+
+.toc,
+.explorer {
+  font-size: 0.86rem;
+
+  & .toc-title,
+  & .explorer-toggle,
+  & button {
+    color: var(--gray);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  & a {
+    color: var(--gray);
+    text-decoration: none;
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+}
+
+// Content meta (dates, reading time) — small, muted, set apart
+.content-meta {
+  color: var(--gray);
+  font-style: italic;
+  font-size: 0.92rem;
+  margin-top: 0.4rem;
+}
+
+// Breadcrumbs — quiet
+.breadcrumb-container {
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+// --- Selection -------------------------------------------------------------
+::selection {
+  background: color-mix(in srgb, var(--secondary) 18%, transparent);
+  color: var(--dark);
+}

@@ -24,30 +24,30 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      header: Newsreader
+      body: Source Serif 4
+      code: JetBrains Mono
     colors:
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "#faf8f4"
+        lightgray: "#e7e3db"
+        gray: "#9c968b"
+        darkgray: "#39362f"
+        dark: "#2b2a28"
+        secondary: "#4b4e8f"
+        tertiary: "#6e72b3"
+        highlight: rgba(75, 78, 143, 0.07)
+        textHighlight: "#fbe79e88"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "#1a1916"
+        lightgray: "#322f2a"
+        gray: "#7a7468"
+        darkgray: "#d6d0c4"
+        dark: "#ece6da"
+        secondary: "#9a9ee0"
+        tertiary: "#b6b9ec"
+        highlight: rgba(154, 158, 224, 0.10)
+        textHighlight: "#b3920288"
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true
@@ -96,6 +96,20 @@ plugins:
     order: 80
   - source: github:quartz-community/fonts
     enabled: true
+    options:
+      fontOrigin: googleFonts
+      useThemeFonts: false
+      header:
+        name: Newsreader
+        weights: [400, 500, 600, 700]
+        includeItalic: true
+      body:
+        name: Source Serif 4
+        weights: [400, 600]
+        includeItalic: true
+      code:
+        name: JetBrains Mono
+        weights: [400, 500]
   - source: github:quartz-community/remove-draft
     enabled: false
   - source: github:quartz-community/explicit-publish
@@ -203,7 +217,7 @@ plugins:
         - type
         - status
         - summary
-      hidePropertiesView: false
+      hidePropertiesView: true
       delimiters: ---
       language: yaml
     order: 5
