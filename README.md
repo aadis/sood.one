@@ -1,3 +1,20 @@
+# sood.one
+
+Personal site built on Quartz v5.
+
+## Setup on a new machine
+
+1. `npm ci && npx quartz plugin install`
+2. Create `.vault-path.local` (git-ignored) pointing to your local Obsidian vault:
+   ```bash
+   echo "/path/to/your/vault" > .vault-path.local
+   ```
+3. Run `./sync.sh` to copy published notes into `content/`, then `npx quartz build --serve` to preview.
+
+`sync.sh` defaults to the work-laptop vault path if `.vault-path.local` is absent.
+
+---
+
 # Quartz v5
 
 > “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming

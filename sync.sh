@@ -4,7 +4,12 @@
 
 set -euo pipefail
 
+# Default vault path (work laptop). Override per machine via .vault-path.local (git-ignored).
+# To set up on a new machine: echo "/path/to/vault" > .vault-path.local
 VAULT="/Users/aaditya.consultant/vaults/cautious-wiki"
+if [[ -f "$(dirname "$0")/.vault-path.local" ]]; then
+  VAULT="$(cat "$(dirname "$0")/.vault-path.local")"
+fi
 CONTENT="$(dirname "$0")/content"
 
 # Wipe and rebuild content/ (keeps index.md)
